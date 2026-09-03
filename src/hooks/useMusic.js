@@ -4,28 +4,28 @@ const songs = [
   {
     id: 1,
     title: "Cruising ",
-    artist: "Dosi",
+    artist: "Aisake, Dosi",
     url: "./songs/Aisake, Dosi - Cruising [NCS Release].mp3",
     duration: "2:40",
   },
   {
     id: 2,
     title: "I Like It",
-    artist: "P",
+    artist: "Fame Sounds, P for Parker, Defx",
     url: "./songs/Fame Sounds, P for Parker, Defx - I Like It [NCS Release].mp3",
     duration: "2:30",
   },
   {
     id: 3,
     title: "Off2",
-    artist: "jonty",
+    artist: "Jonty",
     url: "./songs/jonty - off2 [NCS Release].mp3",
     duration: "3:39",
   },
   {
     id: 4,
     title: "Reason ",
-    artist: "Remy Night",
+    artist: "MANIA, Remy Night",
     url: "./songs/MANIA, Remy Night - Reason (ft. Remy Night) [NCS Release].mp3",
     duration: "3:00",
   },
@@ -58,10 +58,26 @@ export const useMusic = () => {
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   const handlePlaySong = (song, index) => {
     setCurrentSong(song);
     setCurrentSongIndex(index);
+  };
+
+  const nextTrack = () => {
+    setCurrentSongIndex((prve) => {
+      const nextIndex = (prve + 1) % allSongs.length;
+      setCurrentSong(allSongs[nextIndex]);
+      return nextIndex;
+    });
+  };
+  const prevTrack = () => {
+    setCurrentSongIndex((prve) => {
+      const nextIndex = prve === 0 ? allSongs.length - 1 : prve - 1;
+      setCurrentSong(allSongs[nextIndex]);
+      return nextIndex;
+    });
   };
 
   const formatTime = (time) => {
@@ -73,6 +89,9 @@ export const useMusic = () => {
     return `${minutes}:${seconds.toString().padStart(2, "0")}`;
   };
 
+  const play = () => setIsPlaying(true);
+  const pause = () => setIsPlaying(false);
+
   return {
     allSongs,
     handlePlaySong,
@@ -81,5 +100,12 @@ export const useMusic = () => {
     currentTime,
     formatTime,
     duration,
+    setDuration,
+    setCurrentTime,
+    nextTrack,
+    prevTrack,
+    isPlaying,
+    play,
+    pause,
   };
 };

@@ -1,11 +1,69 @@
+import { useEffect, useRef } from "react";
 import { useMusic } from "../hooks/useMusic";
 
 export const MusicPlayer = () => {
-  const { currentSong, formatTime, currentTime, duration } = useMusic();
+  const {
+    currentSong,
+    formatTime,
+    currentTime,
+    duration,
+    setDuration,
+    setCurrentTime,
+    nextTrack,
+    prevTrack,
+    isPlaying,
+    play,
+    pause,
+  } = useMusic();
+  const audioRef = useRef(null);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (isPlaying) {
+      audio.play().catch((err) => console.error(err));
+    } else {
+      audio.pause();
+    }
+  }, [isPlaying]);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    const handleLoadedMetadata = () => {
+      setDuration(audio.duration);
+      //console.log(audio.duration);
+    };
+
+    const handleTimeUpdate = () => {
+      setCurrentTime(audio.currentTime);
+    };
+
+    const handleEnded = () => {};
+
+    audio.addEventListener("loadedmetadata", handleLoadedMetadata);
+    audio.addEventListener("timeupdate", handleTimeUpdate);
+    audio.addEventListener("ended", handleEnded);
+
+    return () => {
+      audio.removeEventListener("loadedmetadata", handleLoadedMetadata);
+      audio.removeEventListener("timeupdate", handleTimeUpdate);
+      audio.removeEventListener("ended", handleEnded);
+    };
+  }, [setDuration, setCurrentTime, currentSong]);
+
   return (
     <>
       <div className="music-player">
-        <audio />
+        <audio
+          ref={audioRef}
+          src={currentSong.url}
+          preload="metadata"
+          crossOrigin="anonymous"
+        />
+
         <div className="song-info">
           <h3 className="song-title">{currentSong.title}</h3>
           <p className="song-artist">{currentSong.artist}</p>
@@ -24,6 +82,20 @@ export const MusicPlayer = () => {
             }}
           />
           <span className="time">{formatTime(duration)}</span>
+        </div>
+        <div className="container">
+          <button className="control-btn" onClick={prevTrack}>
+            ⏮
+          </button>
+          <button
+            className="control-btn play-btn"
+            onClick={isPlaying ? pause : play}
+          >
+            {isPlaying ? "⏸" : "▶"}
+          </button>
+          <button className="control-btn" onClick={nextTrack}>
+            ⏭
+          </button>
         </div>
       </div>
     </>
