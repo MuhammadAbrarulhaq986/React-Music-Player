@@ -14,8 +14,23 @@ export const MusicPlayer = () => {
     isPlaying,
     play,
     pause,
+    volume,
+    setVolume,
   } = useMusic();
   const audioRef = useRef(null);
+
+  const handleTimeChange = (e) => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    const newTime = parseFloat(e.target.value);
+    audio.currentTime = newTime;
+    setCurrentTime(newTime);
+  };
+
+  const handleVolumeChange = (e) => {
+    const newVolume = parseFloat(e.target.value);
+    setVolume(newVolume);
+  };
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -41,7 +56,9 @@ export const MusicPlayer = () => {
       setCurrentTime(audio.currentTime);
     };
 
-    const handleEnded = () => {};
+    const handleEnded = () => {
+      nextTrack();
+    };
 
     audio.addEventListener("loadedmetadata", handleLoadedMetadata);
     audio.addEventListener("timeupdate", handleTimeUpdate);
@@ -77,6 +94,7 @@ export const MusicPlayer = () => {
             step="0.1"
             value={currentTime || 0}
             className="progress-bar"
+            onChange={handleTimeChange}
             style={{
               backgroundSize: `${(currentTime / duration) * 100}% 100%`,
             }}
@@ -96,6 +114,19 @@ export const MusicPlayer = () => {
           <button className="control-btn" onClick={nextTrack}>
             ⏭
           </button>
+        </div>
+        <div className="volume-container">
+          <span className="volume-icon">
+            <input
+              type="range"
+              min="0"
+              max="1"
+              step="0.1"
+              className="volumebar"
+              onChange={handleVolumeChange}
+              value={volume}
+            />
+          </span>
         </div>
       </div>
     </>
