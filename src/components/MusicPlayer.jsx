@@ -35,6 +35,12 @@ export const MusicPlayer = () => {
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
+    audio.volume = volume;
+  }, [volume]);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
 
     if (isPlaying) {
       audio.play().catch((err) => console.error(err));
@@ -61,15 +67,28 @@ export const MusicPlayer = () => {
     };
 
     audio.addEventListener("loadedmetadata", handleLoadedMetadata);
+    audio.addEventListener("canplay", handleLoadedMetadata);
     audio.addEventListener("timeupdate", handleTimeUpdate);
     audio.addEventListener("ended", handleEnded);
 
     return () => {
       audio.removeEventListener("loadedmetadata", handleLoadedMetadata);
+      audio.removeEventListener("canplay", handleLoadedMetadata);
       audio.removeEventListener("timeupdate", handleTimeUpdate);
       audio.removeEventListener("ended", handleEnded);
     };
-  }, [setDuration, setCurrentTime, currentSong]);
+  }, [setDuration, setCurrentTime, currentSong, nextTrack]);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    audio.load();
+    setCurrentTime(0);
+    setDuration(0);
+  }, [currentSong, setCurrentTime, setDuration]);
+
+  const progressPercentage = duration > 0 ? (currentTime / duration) * 100 : 0;
 
   return (
     <>
@@ -96,7 +115,7 @@ export const MusicPlayer = () => {
             className="progress-bar"
             onChange={handleTimeChange}
             style={{
-              backgroundSize: `${(currentTime / duration) * 100}% 100%`,
+              backgroundSize: `${progressPercentage}% 100%`,
             }}
           />
           <span className="time">{formatTime(duration)}</span>
