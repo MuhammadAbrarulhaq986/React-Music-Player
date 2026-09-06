@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { useMusic } from "../hooks/useMusic";
+import { useMusic } from "../hooks/useMusic.js";
 
 export const MusicPlayer = () => {
   const {
@@ -17,6 +17,7 @@ export const MusicPlayer = () => {
     volume,
     setVolume,
   } = useMusic();
+
   const audioRef = useRef(null);
 
   const handleTimeChange = (e) => {
@@ -82,8 +83,8 @@ export const MusicPlayer = () => {
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
-
     audio.load();
+
     setCurrentTime(0);
     setDuration(0);
   }, [currentSong, setCurrentTime, setDuration]);
@@ -99,7 +100,6 @@ export const MusicPlayer = () => {
           preload="metadata"
           crossOrigin="anonymous"
         />
-
         <div className="song-info">
           <h3 className="song-title">{currentSong.title}</h3>
           <p className="song-artist">{currentSong.artist}</p>
