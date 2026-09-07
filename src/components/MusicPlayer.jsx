@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { useMusic } from "../hooks/useMusic.js";
+import { useMusic } from "../contexts/MusicContext.jsx";
 
 export const MusicPlayer = () => {
   const {
