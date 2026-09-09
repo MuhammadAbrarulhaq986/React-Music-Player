@@ -21,6 +21,7 @@ body {
 /* --- App Layout (Side-by-Side Large Laptop View) --- */
 .app {
   width: 100%;
+  margin-right: 250px;
   max-width: 1250px; /* Much wider container for laptop screens */
   background-color: #121212;
   border: 2px solid rgba(255, 230, 0, 0.25);
@@ -350,6 +351,7 @@ body {
   box-shadow: 0 0 15px rgba(255, 230, 0, 0.5);
   font-weight: 700;
 }
+
 .volume-container {
   display: flex;
   align-items: center;
@@ -392,4 +394,171 @@ body {
 
 .volumebar::-webkit-slider-thumb:hover {
   transform: scale(1.2);
+}
+
+.playlists {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+
+.playlists > h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #ffe600;
+  text-shadow: 0 0 10px rgba(255, 230, 0, 0.3);
+  letter-spacing: 0.03em;
+}
+
+/* --- Create Playlist Box --- */
+.create-playlist {
+  background-color: #1a1a1a;
+  border: 1px solid rgba(255, 230, 0, 0.2);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 0 15px rgba(255, 230, 0, 0.05);
+}
+
+.create-playlist h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 12px;
+}
+
+.playlist-form {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.playlist-input {
+  flex: 1;
+  background-color: #121212;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 10px 16px;
+  color: #ffffff;
+  font-size: 0.95rem;
+  outline: none;
+  height: 42px;
+  transition: all 0.2s ease;
+}
+
+.playlist-input:focus {
+  border-color: #ffe600;
+  box-shadow: 0 0 10px rgba(255, 230, 0, 0.2);
+}
+
+.create-btn {
+  background-color: #ffe600;
+  color: #000000;
+  border: none;
+  border-radius: 10px;
+  padding: 0 20px;
+  margin-right: 50px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  height: 40px;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 0 10px rgba(255, 230, 0, 0.3);
+  transition: all 0.2s ease;
+}
+
+.create-btn:hover {
+  background-color: #fff033;
+  box-shadow: 0 0 18px rgba(255, 230, 0, 0.6);
+  transform: translateY(-1px);
+}
+
+/* --- Playlist List Section --- */
+.playlist-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.empty-message {
+  color: #888888;
+  font-size: 0.95rem;
+  text-align: center;
+  padding: 20px;
+  background-color: #161616;
+  border-radius: 12px;
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.playlist-items {
+  background-color: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: all 0.2s ease;
+}
+
+.playlist-items:hover {
+  border-color: rgba(255, 230, 0, 0.4);
+  box-shadow: 0 0 12px rgba(255, 230, 0, 0.08);
+}
+
+.playlist-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.playlist-header h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.delete-playlist-btn {
+  background-color: rgba(255, 50, 50, 0.1);
+  color: #ff4d4d;
+  border: 1px solid rgba(255, 77, 77, 0.3);
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.delete-playlist-btn:hover {
+  background-color: #ff4d4d;
+  color: #000000;
+  box-shadow: 0 0 10px rgba(255, 77, 77, 0.5);
+}
+
+/* --- Add Song Search Inside Playlist --- */
+.add-song-section {
+  width: 100%;
+}
+
+.search-containder {
+  width: 100%;
+}
+
+.search-containder input {
+  width: 100%;
+  background-color: #121212;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 10px 14px;
+  color: #ffffff;
+  font-size: 0.9rem;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.search-containder input:focus {
+  border-color: rgba(255, 230, 0, 0.6);
+  box-shadow: 0 0 8px rgba(255, 230, 0, 0.15);
 }

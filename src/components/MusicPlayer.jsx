@@ -144,6 +144,7 @@ export const MusicPlayer = () => {
               className="volumebar"
               onChange={handleVolumeChange}
               value={volume}
+              style={{ backgroundSize: `${volume * 100}% 100%` }}
             />
           </span>
         </div>
