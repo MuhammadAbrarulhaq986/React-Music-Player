@@ -57,8 +57,8 @@ const songs = [
 
 export const MusicProvider = ({ children }) => {
   const [allSongs, setAllSongs] = useState(songs);
-  const [currentSong, setCurrentSong] = useState(songs[0]);
-  const [currentSongIndex, setCurrentSongIndex] = useState(0);
+  const [currentTrack, setCurrentTrack] = useState(songs[0]);
+  const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -66,24 +66,24 @@ export const MusicProvider = ({ children }) => {
   const [playlists, setPlaylists] = useState([]);
 
   const handlePlaySong = (song, index) => {
-    setCurrentSong(song);
-    setCurrentSongIndex(index);
+    setCurrentTrack(song);
+    setCurrentTrackIndex(index);
     setIsPlaying(false);
   };
 
   const nextTrack = () => {
-    setCurrentSongIndex((prve) => {
+    setCurrentTrackIndex((prve) => {
       const nextIndex = (prve + 1) % allSongs.length;
-      setCurrentSong(allSongs[nextIndex]);
+      setCurrentTrack(allSongs[nextIndex]);
       return nextIndex;
     });
     setIsPlaying(false);
   };
 
   const prevTrack = () => {
-    setCurrentSongIndex((prve) => {
+    setCurrentTrackIndex((prve) => {
       const nextIndex = prve === 0 ? allSongs.length - 1 : prve - 1;
-      setCurrentSong(allSongs[nextIndex]);
+      setCurrentTrack(allSongs[nextIndex]);
       return nextIndex;
     });
     setIsPlaying(false);
@@ -107,6 +107,18 @@ export const MusicProvider = ({ children }) => {
     setPlaylists((prev) => [...prev, newPlaylist]);
   };
 
+  const addSongToPlaylist = (playlistId, song) => {
+    setPlaylists((prev) =>
+      prev.map((playlist) => {
+        if (playlist.id === playlistId) {
+          return { ...playlist, songs: [...playlist.songs, song] };
+        } else {
+          return playlist;
+        }
+      }),
+    );
+  };
+
   const play = () => setIsPlaying(true);
   const pause = () => setIsPlaying(false);
 
@@ -115,13 +127,13 @@ export const MusicProvider = ({ children }) => {
       value={{
         allSongs,
         handlePlaySong,
-        currentSongIndex,
-        currentSong,
+        currentTrackIndex,
+        currentTrack,
         currentTime,
+        setCurrentTime,
         formatTime,
         duration,
         setDuration,
-        setCurrentTime,
         nextTrack,
         prevTrack,
         isPlaying,
@@ -131,6 +143,8 @@ export const MusicProvider = ({ children }) => {
         setVolume,
         createPlaylist,
         playlists,
+        addSongToPlaylist,
+        setCurrentTrack,
       }}
     >
       {children}

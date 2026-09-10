@@ -3,7 +3,7 @@ import { useMusic } from "../contexts/MusicContext.jsx";
 
 export const MusicPlayer = () => {
   const {
-    currentSong,
+    currentTrack,
     formatTime,
     currentTime,
     duration,
@@ -78,7 +78,7 @@ export const MusicPlayer = () => {
       audio.removeEventListener("timeupdate", handleTimeUpdate);
       audio.removeEventListener("ended", handleEnded);
     };
-  }, [setDuration, setCurrentTime, currentSong, nextTrack]);
+  }, [setDuration, setCurrentTime, currentTrack, nextTrack]);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -87,7 +87,7 @@ export const MusicPlayer = () => {
 
     setCurrentTime(0);
     setDuration(0);
-  }, [currentSong, setCurrentTime, setDuration]);
+  }, [currentTrack, setCurrentTime, setDuration]);
 
   const progressPercentage = duration > 0 ? (currentTime / duration) * 100 : 0;
 
@@ -96,13 +96,13 @@ export const MusicPlayer = () => {
       <div className="music-player">
         <audio
           ref={audioRef}
-          src={currentSong.url}
+          src={currentTrack.url}
           preload="metadata"
           crossOrigin="anonymous"
         />
         <div className="song-info">
-          <h3 className="song-title">{currentSong.title}</h3>
-          <p className="song-artist">{currentSong.artist}</p>
+          <h3 className="song-title">{currentTrack.title}</h3>
+          <p className="song-artist">{currentTrack.artist}</p>
         </div>
         <div className="progress-container">
           <span className="time">{formatTime(currentTime)}</span>
