@@ -15,14 +15,13 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 30px;
+  padding: 20px;
 }
 
 /* --- App Layout (Side-by-Side Large Laptop View) --- */
 .app {
   width: 100%;
-  margin-right: 250px;
-  max-width: 1250px; /* Much wider container for laptop screens */
+  max-width: 1300px;
   background-color: #121212;
   border: 2px solid rgba(255, 230, 0, 0.25);
   border-radius: 24px;
@@ -35,61 +34,67 @@ body {
 /* --- Main Section: Flex Row (Player Left, Songs Right) --- */
 .app-main {
   display: flex;
-  flex-direction: row; /* Puts player on the left and songs on the right */
+  flex-direction: row;
   width: 100%;
-  min-height: 600px;
+  min-height: 620px;
 }
 
 /* --- Music Player Section (Left Side) --- */
 .player-section {
-  flex: 1; /* Takes up equal/proportional left side space */
+  flex: 1.1;
   background-color: #161616;
   border-right: 2px solid rgba(255, 230, 0, 0.15);
-  padding: 50px 40px;
+  padding: 40px 30px;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Centers player contents nicely vertically */
+  justify-content: center;
+  align-items: center;
 }
 
 .music-player {
   display: flex;
   flex-direction: column;
-  gap: 35px;
+  gap: 25px;
   align-items: center;
   width: 100%;
 }
 
 .music-player .song-info {
   text-align: center;
+  width: 100%;
+  padding: 0 10px;
 }
 
 .music-player .song-title {
-  font-size: 2.3rem; /* Big prominent track title */
+  font-size: 2rem;
   font-weight: 700;
   color: #ffffff;
   text-shadow: 0 0 15px rgba(255, 230, 0, 0.4);
-  margin-bottom: 10px;
+  margin-bottom: 8px;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .music-player .song-artist {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   color: #b0b0b0;
+  word-break: break-word;
 }
 
 /* --- Progress Bar Controls --- */
 .progress-container {
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 15px;
   width: 100%;
-  max-width: 450px;
+  max-width: 420px;
 }
 
 .time {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: #b0b0b0;
   font-weight: 600;
-  min-width: 48px;
+  min-width: 42px;
   text-align: center;
 }
 
@@ -124,19 +129,19 @@ body {
 
 /* --- All Songs / Playlists Section (Right Side) --- */
 .contact-section {
-  flex: 1.2; /* Slightly wider right panel for lists */
-  padding: 40px;
+  flex: 1.3;
+  padding: 55px;
   background-color: #121212;
-  max-height: 600px; /* Tall scroll area matching the layout */
+  max-height: 620px;
   overflow-y: auto;
 }
 
 .all-songs h2 {
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: #ffe600;
   text-shadow: 0 0 10px rgba(255, 230, 0, 0.3);
-  margin-bottom: 20px;
+  margin-bottom: 18px;
   letter-spacing: 0.03em;
 }
 
@@ -154,9 +159,10 @@ body {
   background-color: #1a1a1a;
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 16px;
-  padding: 18px 24px;
+  padding: 16px 20px;
   cursor: pointer;
   transition: all 0.2s ease;
+  gap: 35px;
 }
 
 .song-card:hover {
@@ -175,13 +181,19 @@ body {
 .song-card .song-info {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 5px;
+  flex: 1;
+  min-width: 0; /* Prevents flex items from overflowing text bounds */
 }
 
 .song-card .song-title {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   font-weight: 600;
   color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  /*padding: 20px;*/
+  text-overflow: ellipsis; /* Keeps long titles cleanly truncated with dots or distinct */
 }
 
 .song-card.active .song-title {
@@ -190,28 +202,32 @@ body {
 }
 
 .song-card .song-artist {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: #999999;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .song-card .song-duration {
   font-size: 0.85rem;
   color: #777777;
-  margin-top: 2px;
 }
 
 .play-btn {
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   color: #ffe600;
   background: rgba(255, 230, 0, 0.1);
-  width: 44px;
-  height: 44px;
+  min-width: 40px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   box-shadow: 0 0 10px rgba(255, 230, 0, 0.15);
   transition: all 0.2s ease;
+  flex-shrink: 0;
 }
 
 .song-card:hover .play-btn {
@@ -242,8 +258,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px;
-  margin-top: 20px;
+  gap: 15px;
+  margin-top: 5px;
 }
 
 .control-btn {
@@ -251,12 +267,12 @@ body {
   color: #ffe600;
   border: 2px solid rgba(255, 230, 0, 0.3);
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  width: 46px;
+  height: 46px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.1rem;
+  font-size: 1rem;
   cursor: pointer;
   transition: all 0.2s ease;
   box-shadow: 0 0 10px rgba(255, 230, 0, 0.1);
@@ -271,9 +287,9 @@ body {
 }
 
 .control-btn.play-btn {
-  width: 64px;
-  height: 64px;
-  font-size: 1.4rem;
+  width: 58px;
+  height: 58px;
+  font-size: 1.3rem;
   background-color: #ffe600;
   color: #000000;
   border-color: #ffe600;
@@ -295,7 +311,7 @@ body {
   align-items: center;
   background-color: #141414;
   border-bottom: 2px solid rgba(255, 230, 0, 0.2);
-  padding: 20px 40px;
+  padding: 18px 35px;
   width: 100%;
 }
 
@@ -305,7 +321,7 @@ body {
 }
 
 .brand-link {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 800;
   color: #ffffff;
   text-decoration: none;
@@ -321,11 +337,11 @@ body {
 
 .navbar-links {
   display: flex;
-  gap: 20px;
+  gap: 15px;
 }
 
 .nav-link {
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 600;
   color: #a0a0a0;
   text-decoration: none;
@@ -357,8 +373,8 @@ body {
   align-items: center;
   justify-content: center;
   width: 100%;
-  max-width: 200px;
-  margin-top: 10px;
+  max-width: 180px;
+  margin-top: 5px;
 }
 
 .volume-icon {
@@ -399,12 +415,12 @@ body {
 .playlists {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
   width: 100%;
 }
 
 .playlists > h2 {
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: #ffe600;
   text-shadow: 0 0 10px rgba(255, 230, 0, 0.3);
@@ -416,21 +432,21 @@ body {
   background-color: #1a1a1a;
   border: 1px solid rgba(255, 230, 0, 0.2);
   border-radius: 16px;
-  padding: 20px;
+  padding: 18px;
   box-shadow: 0 0 15px rgba(255, 230, 0, 0.05);
 }
 
 .create-playlist h3 {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 600;
   color: #ffffff;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .playlist-form {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   width: 100%;
 }
 
@@ -439,11 +455,11 @@ body {
   background-color: #121212;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 10px;
-  padding: 10px 16px;
+  padding: 0 14px;
   color: #ffffff;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   outline: none;
-  height: 42px;
+  height: 40px;
   transition: all 0.2s ease;
 }
 
@@ -457,8 +473,8 @@ body {
   color: #000000;
   border: none;
   border-radius: 10px;
-  padding: 0 20px;
-  margin-right: 50px;
+  padding: 0 18px;
+  margin-right: 0; /* Fixed the weird push bug */
   font-weight: 700;
   font-size: 0.9rem;
   height: 40px;
@@ -478,14 +494,14 @@ body {
 .playlist-list {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
 }
 
 .empty-message {
   color: #888888;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   text-align: center;
-  padding: 20px;
+  padding: 18px;
   background-color: #161616;
   border-radius: 12px;
   border: 1px dashed rgba(255, 255, 255, 0.1);
@@ -495,10 +511,10 @@ body {
   background-color: #1a1a1a;
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 16px;
-  padding: 20px;
+  padding: 18px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
   transition: all 0.2s ease;
 }
 
@@ -511,12 +527,14 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 10px;
 }
 
 .playlist-header h3 {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 600;
   color: #ffffff;
+  word-break: break-word;
 }
 
 .delete-playlist-btn {
@@ -524,10 +542,11 @@ body {
   color: #ff4d4d;
   border: 1px solid rgba(255, 77, 77, 0.3);
   border-radius: 8px;
-  padding: 6px 14px;
-  font-size: 0.85rem;
+  padding: 6px 12px;
+  font-size: 0.8rem;
   font-weight: 600;
   cursor: pointer;
+  white-space: nowrap;
   transition: all 0.2s ease;
 }
 
@@ -540,6 +559,9 @@ body {
 /* --- Add Song Search Inside Playlist --- */
 .add-song-section {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .search-containder {
@@ -561,4 +583,40 @@ body {
 .search-containder input:focus {
   border-color: rgba(255, 230, 0, 0.6);
   box-shadow: 0 0 8px rgba(255, 230, 0, 0.15);
+}
+
+/* --- Dropdown search results box with distinct border and spacing --- */
+.playlist-songs-dropdown,
+.search-results-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background-color: #121212;
+  border: 2px solid rgba(255, 230, 0, 0.25);
+  border-radius: 12px;
+  padding: 12px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+/* --- Individual song search result item box --- */
+.playlist-song-item,
+.search-result-item {
+  background-color: #1a1a1a;
+  border: 2px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 10px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.playlist-song-item:hover,
+.search-result-item:hover {
+  background-color: #222222;
+  border-color: rgba(255, 230, 0, 0.5);
+  box-shadow: 0 0 8px rgba(255, 230, 0, 0.1);
+  border: 2px solid yellow;
 }
